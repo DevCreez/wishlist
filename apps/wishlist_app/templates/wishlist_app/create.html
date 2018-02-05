@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create</title>
+</head>
+<body>
+    <a href="/">Logout</a>  <a href="/dashboard">Home</a>
+    <h1>Create a new Wishlist Item</h1>
+    <form action="/add_item" method="post">
+        {% csrf_token %}
+        Item/Product: <input name="item" type="text"><br>
+        <input type="submit" value="Add">
+    </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

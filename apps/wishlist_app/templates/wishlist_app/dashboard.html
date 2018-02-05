@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+            </style>
+    <title>Wishlist Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.name }}</h1>
+    <a href="/">Logout</a>
+    <p>Your Wish List:</p>
+    <table class="table">
+        <tr>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+        </tr>
+        {% for elements in myList %}
+        <tr>
+            <td><a href="/wish_item/{{ elements.wishlist.id }}">{{ elements.wishlist.item }}</a></td>
+            <td>{{ elements.wishlist.added_by.username }}</td>
+            <td>{{ elements.wishlist.date_added }}</td>
+            <td><a href='/removeItem/{{elements.id}}'>Remove from my Wishlist</a></td>
+        </tr>
+        {% endfor %}
+        {% for elements in myItems %}
+        <tr>
+            <td><a href="/wish_item/{{ elements.id }}">{{ elements.item }}</a></td>
+            <td>{{ elements.added_by.username }}</td>
+            <td>{{ elements.date_added }}</td>
+            <td><a href="/deleteItem/{{elements.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p>Other Users' Wish List:</p>
+    <table class="table">
+        <tr>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+        </tr>
+        {% for elements in wishlist %}
+        <tr>
+            <td><a href="/wish_item/{{ elements.id }}">{{ elements.item }}</a></td>
+            <td>{{ elements.added_by.username }}</td>
+            <td>{{ elements.date_added }}</td>
+            <td><a href='/myWishlist/{{elements.id}}'>Add to my Wishlist</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+        <br>
+        <br>
+    <a href="/create">Add Item</a>
+</body>
+</html>
